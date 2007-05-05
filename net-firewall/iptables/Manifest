@@ -1,0 +1,58 @@
+AUX 1.3.1-files/grsecurity-1.2.8-iptables.patch-1.3.1 1315 RMD160 3665aaa6788261f16372c1e34810fe99fd60453c SHA1 b3c88dc5ceebc15aca73fcc02afdf8d0fa6a389f SHA256 f86e32f84af0e68b927b712a60e5d02d1bc27972537f476c71a311711fdcfc12
+MD5 319d0b089a495ce1ab8ca02b3820dfe3 files/1.3.1-files/grsecurity-1.2.8-iptables.patch-1.3.1 1315
+RMD160 3665aaa6788261f16372c1e34810fe99fd60453c files/1.3.1-files/grsecurity-1.2.8-iptables.patch-1.3.1 1315
+SHA256 f86e32f84af0e68b927b712a60e5d02d1bc27972537f476c71a311711fdcfc12 files/1.3.1-files/grsecurity-1.2.8-iptables.patch-1.3.1 1315
+AUX 1.3.1-files/install_all_dev_files.patch-1.3.1 2748 RMD160 9df4ee7b0a26e83b02ef6cbe071d00841d9a070b SHA1 c854c1d520a923d1616ba1d374bfa5729a122767 SHA256 c61769413e3a71e008f927b0639d26db6586f921f371a89b3db0e892d064af28
+MD5 3124fc7d3898ab52264dc9f26890bb44 files/1.3.1-files/install_all_dev_files.patch-1.3.1 2748
+RMD160 9df4ee7b0a26e83b02ef6cbe071d00841d9a070b files/1.3.1-files/install_all_dev_files.patch-1.3.1 2748
+SHA256 c61769413e3a71e008f927b0639d26db6586f921f371a89b3db0e892d064af28 files/1.3.1-files/install_all_dev_files.patch-1.3.1 2748
+AUX 1.3.1-files/install_ipv6_apps.patch 826 RMD160 505c5832d20fad96839936da900a12b5f4209045 SHA1 6e5808694e17002f2312ea9a45b46fb577694a83 SHA256 0a7f666962e586b2be8d2d3d2947497b3e3837c78b57056ce065455518c78722
+MD5 ade9674a3d293afd0153fafe34a672d3 files/1.3.1-files/install_ipv6_apps.patch 826
+RMD160 505c5832d20fad96839936da900a12b5f4209045 files/1.3.1-files/install_ipv6_apps.patch 826
+SHA256 0a7f666962e586b2be8d2d3d2947497b3e3837c78b57056ce065455518c78722 files/1.3.1-files/install_ipv6_apps.patch 826
+AUX 1.3.1-files/iptables-1.3.1-compilefix.patch 358 RMD160 359adb7cc1876e664a69bba472fa97155df808ab SHA1 977b9685e03b8f4653abcb1f7fab70695d0c5ef5 SHA256 b0e802e86e601f5229a8f1bbbdfbe4c97b13ede4931e5ee2d73f176c7f121e99
+MD5 d6121c3a118e7a06de577383c1c99fe0 files/1.3.1-files/iptables-1.3.1-compilefix.patch 358
+RMD160 359adb7cc1876e664a69bba472fa97155df808ab files/1.3.1-files/iptables-1.3.1-compilefix.patch 358
+SHA256 b0e802e86e601f5229a8f1bbbdfbe4c97b13ede4931e5ee2d73f176c7f121e99 files/1.3.1-files/iptables-1.3.1-compilefix.patch 358
+AUX 1.3.5-files/iptables-1.3.5-errno.patch 689 RMD160 67ce38c86fbef574e8f7d2f4ebffbecff35bf59f SHA1 7a45e68e5d332529ab5697886417cff59ef53fe1 SHA256 09eff37038db0fd66cb68f5e84dd93c031445f29e3a50afe18d3d389fe5cded1
+MD5 b27a0ebcd83384e92ee63d64da85af69 files/1.3.5-files/iptables-1.3.5-errno.patch 689
+RMD160 67ce38c86fbef574e8f7d2f4ebffbecff35bf59f files/1.3.5-files/iptables-1.3.5-errno.patch 689
+SHA256 09eff37038db0fd66cb68f5e84dd93c031445f29e3a50afe18d3d389fe5cded1 files/1.3.5-files/iptables-1.3.5-errno.patch 689
+AUX 1.3.5-files/iptables-1.3.5-linux-headers.patch 326 RMD160 f2b26ab8603ff910bc10a9fe478635ccb2982a0a SHA1 06c78ad9156aa5f0c06c0bb7933eb36258ca4ad3 SHA256 deb8a15c8368fa0d790d684a9dcfb5dc0e7e37b5786f59f66ef0d112c5fd3059
+MD5 69c06205e06c346034f5d186bb45bec6 files/1.3.5-files/iptables-1.3.5-linux-headers.patch 326
+RMD160 f2b26ab8603ff910bc10a9fe478635ccb2982a0a files/1.3.5-files/iptables-1.3.5-linux-headers.patch 326
+SHA256 deb8a15c8368fa0d790d684a9dcfb5dc0e7e37b5786f59f66ef0d112c5fd3059 files/1.3.5-files/iptables-1.3.5-linux-headers.patch 326
+AUX 1.3.5-files/iptables-1.3.5-log-prefix-no-empty-strings.patch 1607 RMD160 9624733334644b55136724a665e15afa7156f86a SHA1 5cc4fd5fabb44fe72c8a3695e0bd63d06b28c1bd SHA256 5c7617471f98413f1af9ab2846336cbcdf8b2449402967a03b460683aa225bec
+MD5 638f482b4704faf36ba7c6081b86fb55 files/1.3.5-files/iptables-1.3.5-log-prefix-no-empty-strings.patch 1607
+RMD160 9624733334644b55136724a665e15afa7156f86a files/1.3.5-files/iptables-1.3.5-log-prefix-no-empty-strings.patch 1607
+SHA256 5c7617471f98413f1af9ab2846336cbcdf8b2449402967a03b460683aa225bec files/1.3.5-files/iptables-1.3.5-log-prefix-no-empty-strings.patch 1607
+AUX ip6tables-1.3.2.confd 293 RMD160 2e5399355a930ab3c804c9cc46fe37763555a97e SHA1 0e82dbe8538f9168bb97939a03b73dd291e82760 SHA256 c93827ac2b8fdd83e2c36788053ee7567ceb13b3cbc5fcf40d186500e05c8104
+MD5 dbef6253ff7e347e7fa35a02652ab684 files/ip6tables-1.3.2.confd 293
+RMD160 2e5399355a930ab3c804c9cc46fe37763555a97e files/ip6tables-1.3.2.confd 293
+SHA256 c93827ac2b8fdd83e2c36788053ee7567ceb13b3cbc5fcf40d186500e05c8104 files/ip6tables-1.3.2.confd 293
+AUX iptables-1.3.2.confd 290 RMD160 cb180068f86a608b16d850635ae909ea7b9cc059 SHA1 cb56dba4799eb3998b28e492c61265574c37d522 SHA256 351e123ba9e0ec7db2bcff42849aa627d29a3b2e77a47b82386f5e3a7e21bd30
+MD5 956ebf5ab69e5a1e1d3983541eab643b files/iptables-1.3.2.confd 290
+RMD160 cb180068f86a608b16d850635ae909ea7b9cc059 files/iptables-1.3.2.confd 290
+SHA256 351e123ba9e0ec7db2bcff42849aa627d29a3b2e77a47b82386f5e3a7e21bd30 files/iptables-1.3.2.confd 290
+AUX iptables-1.3.2.init 2570 RMD160 84d06807fae0455009476cfa63dfcda9fe016dc3 SHA1 da7c4fca4049c4d3f45e32d29403c8bb05047f15 SHA256 1137517483c0d312e3d396d953e9ee197b84f64ed17adfd48f25dbb60e114697
+MD5 2202ac150a5dfe32a8363b0ad565ee1d files/iptables-1.3.2.init 2570
+RMD160 84d06807fae0455009476cfa63dfcda9fe016dc3 files/iptables-1.3.2.init 2570
+SHA256 1137517483c0d312e3d396d953e9ee197b84f64ed17adfd48f25dbb60e114697 files/iptables-1.3.2.init 2570
+AUX iptables-1.3.7-more-exact-check-grep.patch 602 RMD160 80c80f9d2a2567b164932adc1e9ddb1392b34791 SHA1 5bb693f7ddc641b793334d072b106ab998f4202e SHA256 aa26f352dc2b870363b7de1586105a4bf19eb9a6c6703a23f64ef9656017021d
+MD5 0b0e12c269db9fd7c8e9835f0a9fd3fa files/iptables-1.3.7-more-exact-check-grep.patch 602
+RMD160 80c80f9d2a2567b164932adc1e9ddb1392b34791 files/iptables-1.3.7-more-exact-check-grep.patch 602
+SHA256 aa26f352dc2b870363b7de1586105a4bf19eb9a6c6703a23f64ef9656017021d files/iptables-1.3.7-more-exact-check-grep.patch 602
+AUX iptables-1.3.7-sparc64.patch 629 RMD160 15655e9ef5047055f9930de11d313e7e9377f083 SHA1 7ca7c7d54840c94a3bd4054f0e0ef38067937b49 SHA256 cd76d6b43d55f77df0af7ad493df3f6f07756b1e410121a2a6045a97b7ce7647
+MD5 312292cd14526a498be912d671fd9ae5 files/iptables-1.3.7-sparc64.patch 629
+RMD160 15655e9ef5047055f9930de11d313e7e9377f083 files/iptables-1.3.7-sparc64.patch 629
+SHA256 cd76d6b43d55f77df0af7ad493df3f6f07756b1e410121a2a6045a97b7ce7647 files/iptables-1.3.7-sparc64.patch 629
+DIST iptables-1.3.0-imq1.diff 5369 RMD160 8ca1fa3bfea02d27232d8d8cb0a12586dd4537b5 SHA1 bdf665cacc985fceaadf119ae7a756caca1589ad SHA256 0f9d36e48b3f1e83ef9e1d39c19e7271a889a31c65c396c416200eb143f1795b
+DIST iptables-1.3.7.tar.bz2 196205 RMD160 8109f2d58eb33905bbbbc0cf871abc8172e7ddc0 SHA1 2f25e7a81fb3e81f92b0121d9dcd5a536854dc60 SHA256 0e00cea0029eaf7923a4a901265d5aa8159804b520fda9c12df54d350073ce02
+DIST netfilter-layer7-v2.9.tar.gz 122497 RMD160 0398b8b61b24eb5d28309a53af0279e9f201318d SHA1 c4a1d92855ad51413fbd7229fe9decfe45aac084 SHA256 7db0e22297f7ecec41bb973733d6970bab922b4c54f779239616fa26a2315969
+EBUILD iptables-1.3.7.ebuild 5846 RMD160 e26c375517dcb4ba962cdda904e03fa0319d0c6e SHA1 055f3695a7d537284ced75b00a69c2bf6892e214 SHA256 b0f0cd7fe5bcd07e1c39da9cc4eed4c487184399764579c874079a342a038d6a
+MD5 3d4bf0a5bcabc0412b1bdf37b33e4a25 iptables-1.3.7.ebuild 5846
+RMD160 e26c375517dcb4ba962cdda904e03fa0319d0c6e iptables-1.3.7.ebuild 5846
+SHA256 b0f0cd7fe5bcd07e1c39da9cc4eed4c487184399764579c874079a342a038d6a iptables-1.3.7.ebuild 5846
+MD5 1f40726055a119edf736bd7c7b5620e7 files/digest-iptables-1.3.7 759
+RMD160 ee6a5537941ce5689ee0ef7e302b990a0222142c files/digest-iptables-1.3.7 759
+SHA256 7d47914b31c063817423c4f38b8f047f2f9094f749991b37e12b3987f644d990 files/digest-iptables-1.3.7 759

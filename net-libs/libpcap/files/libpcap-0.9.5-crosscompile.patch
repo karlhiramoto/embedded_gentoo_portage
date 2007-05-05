@@ -1,0 +1,15 @@
+diff -ru libpcap-0.9.5~/configure.in libpcap-0.9.5/configure.in
+--- libpcap-0.9.5~/configure.in	2007-04-30 14:26:44.000000000 +0200
++++ libpcap-0.9.5/configure.in	2007-05-01 23:37:44.000000000 +0200
+@@ -356,9 +356,8 @@
+  	fi
+ 	AC_MSG_RESULT($ac_cv_linux_vers)
+  	if test $ac_cv_linux_vers = unknown ; then
+- 		AC_MSG_ERROR(cannot determine linux version when cross-compiling)
+- 	fi
+-	if test $ac_cv_linux_vers -lt 2 ; then
++ 		AC_MSG_WARN(cannot determine linux version when cross-compiling)
++	elif test $ac_cv_linux_vers -lt 2 ; then
+ 		AC_MSG_ERROR(version 2 or higher required; see the INSTALL doc for more info)
+ 	fi
+ 	AC_LBL_TPACKET_STATS
