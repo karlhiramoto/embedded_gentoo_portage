@@ -1,0 +1,41 @@
+--- p3scan-2.9.03d/src/p3scan.c	2006-01-30 21:58:42.000000000 +0100
++++ p3scan-2.9.03d-new/src/p3scan.c	2006-02-06 21:12:50.313460864 +0100
+@@ -115,9 +115,9 @@
+ #if HAVE_UNISTD_H
+ #include <unistd.h>
+ #endif
+-//#ifdef MTRACE
++#ifdef MTRACE
+ #include <mcheck.h>
+-//#endif /* MTRACE */
++#endif /* MTRACE */
+ 
+ #include <assert.h>
+ #include <ctype.h>
+@@ -210,7 +210,7 @@
+   int abortfd=0;
+   time_t now = time(NULL);
+   va_list az;
+-  struct mallinfo m=mallinfo();
++//  struct mallinfo m=mallinfo();
+ 
+   if (!config->debug && !config->status && level==LOG_DEBUG) return;
+   if (!config->debug && config->quiet && level==LOG_NOTICE) return;
+@@ -220,7 +220,7 @@
+   if (config->status) fprintf(stderr,"%s\n", puffer);
+   else if (config->debug){
+     fflush(stdout);
+-    if (config->debug_memory) fprintf(stderr,"%.8s %s[%i]: Mem: %i %s\n",timenow, config->syslogname, getpid(), m.uordblks, puffer);
++    if (config->debug_memory) fprintf(stderr,"%.8s %s[%i]: Mem: %i %s\n",timenow, config->syslogname, getpid(), -1, puffer);
+     else fprintf(stderr,"%.8s %s[%i]: %s\n",timenow, config->syslogname, getpid(), puffer);
+     fflush(NULL);
+   } else {
+@@ -3303,7 +3303,7 @@
+   long n_desc;
+   int i;
+ 
+-  mtrace();
++//  mtrace();
+   clean=0;
+   if ((config=malloc(sizeof(struct configuration_t))) == NULL){
+     printf ("This is bad... no memory already?");

@@ -1,0 +1,39 @@
+diff -Nru p3scan-2.9.03d/src/p3scan.c p3scan-2.9.03d-fix/src/p3scan.c
+--- p3scan-2.9.03d/src/p3scan.c	2006-03-02 16:13:55.514283240 +0100
++++ p3scan-2.9.03d-fix/src/p3scan.c	2006-03-02 16:22:56.411054432 +0100
+@@ -1507,6 +1507,7 @@
+   p->nosend=0;
+   p->blacklist=0;
+   p->whitelist=0;
++  p->imap=0;
+   return p;
+ }
+ 
+@@ -1660,7 +1661,7 @@
+   char  *tmp3=NULL;
+   int blacklist_fd, whitelist_fd;
+ #define STARTWITH 1
+-  int *msgnr, *tmpmsgnr;
++  int *msgnr = NULL, *tmpmsgnr = NULL;
+   char *itag;
+   long int inr;
+   const char spacer[] = " ";
+@@ -1815,7 +1816,8 @@
+         do_log(LOG_DEBUG, "Line too long: Getting rest of line.");
+       } else {
+         do_log(LOG_DEBUG, "Closing connection (no more input from server)");
+-        if (config->skipsize && (sizeof msgnr) && !p->cksmtp) free(msgnr);
++        if (config->skipsize && (sizeof msgnr) && !p->cksmtp) 
++		if (msgnr) free(msgnr);
+         return 0;
+       }
+     } else {
+@@ -1856,7 +1858,7 @@
+           i=strtol(p->serverbuf->line, &rest, 10);
+           if (i != ii){
+             if ((tmpmsgnr=realloc(msgnr,sizeof(int) * i)) == NULL) {
+-              free(msgnr);
++              if (msgnr) free(msgnr);
+               do_log(LOG_EMERG,"LIST realloc failed!");
+             }else msgnr=tmpmsgnr;
+             msgnr[i-1]=strtol(rest,&rest2,10) / 1024;

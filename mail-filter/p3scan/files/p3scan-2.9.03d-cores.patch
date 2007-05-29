@@ -1,0 +1,19 @@
+--- p3scan-2.9.03d/src/p3scan.c	2006-04-21 16:25:07.665548392 +0200
++++ p3scan-2.9.03d-core/src/p3scan.c	2006-04-21 16:24:02.602439488 +0200
+@@ -135,6 +135,7 @@
+ #include <stdarg.h>
+ #include <stdio.h>
+ #include <sys/ioctl.h>
++#include <sys/prctl.h>
+ 
+ #include "p3scan.h"
+ #ifdef POP3S
+@@ -3409,6 +3410,8 @@
+ // Emergency: main: Unknown user in configuration file
+     if (pws == NULL) do_log(LOG_EMERG,"ERR: Unknown User '%s'",config->runasuser);
+     setuid(pws->pw_uid);
++    /* Allow cores to be dumped */
++    prctl(PR_SET_DUMPABLE, 1);
+   }
+   cuid=getuid();
+   pws = getpwuid(cuid);

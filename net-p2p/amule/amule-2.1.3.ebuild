@@ -44,7 +44,8 @@ pkg_setup() {
 				need-wxwidgets base-unicode
 		else
 				einfo "wxGTK without X support will be used"
-				need-wxwidgets base
+				#need-wxwidgets base
+				
 		fi
 
 		if use stats && ! use gtk; then
