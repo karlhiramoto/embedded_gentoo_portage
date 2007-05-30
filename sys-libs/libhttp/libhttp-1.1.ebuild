@@ -19,8 +19,8 @@ src_unpack() {
 }
 
 src_compile() {
-	econf
-	emake 
+	econf  || die "Configure failed"
+	emake  || die "Compile failed"
 }
 
 src_install() {
