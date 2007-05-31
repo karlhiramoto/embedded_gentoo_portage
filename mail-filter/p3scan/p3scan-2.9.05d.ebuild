@@ -30,6 +30,11 @@ src_install () {
 	newinitd ${FILESDIR}/${PN}.init ${PN}
 
 	dosbin src/${PN} || die
+	# iron-gate api
+        echo
+        echo `pwd`
+        mkdir -p "${D}"/usr/include/
+        install src/p3scan-api.h  "${D}"/usr/include/
 
 	dodir /etc/${PN}
 	insinto /etc/${PN}
@@ -58,6 +63,7 @@ src_install () {
 
 	dodoc AUTHORS CHANGELOG CONTRIBUTERS LICENSE NEWS README \
 		README-rpm TODO.list p3scan.sh spamfaq.*
+
 }
 
 pkg_postinst() {
