@@ -207,7 +207,11 @@ src_unpack() {
 #	echo "ARCH_$(uclibc_endian | tr [a-z] [A-Z])_ENDIAN=y" >> .config
 
 #	sed -i -e '/ARCH_.*_ENDIAN/d' .config
+
+#karl's hack
+	einfo "karl's hack for ARCH_BIG_ENDIAN and ADD_LIBGCC_FUNCTIONS"
 	echo "ARCH_BIG_ENDIAN=y" >> .config
+	echo "ADD_LIBGCC_FUNCTIONS=y" >> .config
 
 	if [[ $(tc-is-softfloat) != "no" ]] ; then
 		sed -i -e '/^HAS_FPU=y$/d' .config

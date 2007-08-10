@@ -66,9 +66,17 @@ pkg_preinst() {
 	fi
 }
 
+src_unpack() {
+	unpack ${A}
+	cd ${S}
+	epatch "${FILESDIR}"/add-amule-2.1.3.patch
+}
+
 src_compile() {
 		local myconf=""
 
+		epat
+		CXX="/usr/uClibc++/bin/g++-uc"
 		if use gtk ; then
 				use stats && myconf="${myconf}
 					--enable-wxcas
