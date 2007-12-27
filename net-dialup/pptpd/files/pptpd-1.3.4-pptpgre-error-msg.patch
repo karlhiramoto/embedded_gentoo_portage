@@ -1,0 +1,59 @@
+--- pptpd-1.3.4-orig/pptpgre.c	2007-04-16 02:21:02.000000000 +0200
++++ pptpd-1.3.4/pptpgre.c	2007-11-13 17:31:54.000000000 +0100
+@@ -355,14 +355,49 @@
+ 	header = (struct pptp_gre_header *) (buffer + ip_len);
+ 
+ 	/* verify packet (else discard) */
+-	if (((ntoh8(header->ver) & 0x7F) != PPTP_GRE_VER) ||	/* version should be 1   */
+-	    (ntoh16(header->protocol) != PPTP_GRE_PROTO) ||	/* GRE protocol for PPTP */
+-	    PPTP_GRE_IS_C(ntoh8(header->flags)) ||	/* flag C should be clear   */
+-	    PPTP_GRE_IS_R(ntoh8(header->flags)) ||	/* flag R should be clear   */
+-	    (!PPTP_GRE_IS_K(ntoh8(header->flags))) ||	/* flag K should be set     */
+-	    ((ntoh8(header->flags) & 0xF) != 0)) {	/* routing and recursion ctrl = 0  */
++	if ( (ntoh8(header->ver) & 0x7F) != PPTP_GRE_VER )  {
++		/* version should be 1   */
+ 		/* if invalid, discard this packet */
+-		syslog(LOG_ERR, "GRE: Discarding packet by header check");
++		syslog(LOG_ERR, "GRE: Discarding packet by header check. version should be 1. = %hhx ",(ntoh8(header->ver) & 0x7F));
++		stats.rx_invalid++;
++		return 0;
++	}
++	
++	if (ntoh16(header->protocol) != PPTP_GRE_PROTO)  {
++ 		/* GRE protocol for PPTP */
++		/* if invalid, discard this packet */
++		syslog(LOG_ERR, "GRE: Discarding packet by header check. not GRE protocol for PPTP ");
++		stats.rx_invalid++;
++		return 0;
++	}
++	if (    PPTP_GRE_IS_C(ntoh8(header->flags)) ) {  
++		/* flag C should be clear   */
++		/* if invalid, discard this packet */
++		syslog(LOG_ERR, "GRE: Discarding packet by header check.  flag C should be clear");
++		stats.rx_invalid++;
++		return 0;
++
++	}
++	if (PPTP_GRE_IS_R(ntoh8(header->flags))	) {
++		/* flag R should be clear   */
++		/* if invalid, discard this packet */
++		syslog(LOG_ERR, "GRE: Discarding packet by header check.  flag R should be clear");
++		stats.rx_invalid++;
++		return 0;
++	}
++	
++	if    (!PPTP_GRE_IS_K(ntoh8(header->flags))) {
++		/* flag K should be set     */
++		/* if invalid, discard this packet */
++		syslog(LOG_ERR, "GRE: Discarding packet by header check. flag K should be set");
++		stats.rx_invalid++;
++		return 0;		
++	}
++
++	if   ((ntoh8(header->flags) & 0xF) != 0) {
++		/* routing and recursion ctrl = 0  */
++		/* if invalid, discard this packet */
++		syslog(LOG_ERR, "GRE: Discarding packet by header check. routing and recursion ctrl = 0 ");
+ 		stats.rx_invalid++;
+ 		return 0;
+ 	}
