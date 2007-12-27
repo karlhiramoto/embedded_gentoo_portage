@@ -6,6 +6,10 @@ AUX pptpd-1.3.4-more-reodering-fixes.patch 2340 RMD160 9322b15ead0ac585e7bb1a7ba
 MD5 09e151f3b14f0d0c0cc73d6afeb45bfa files/pptpd-1.3.4-more-reodering-fixes.patch 2340
 RMD160 9322b15ead0ac585e7bb1a7bae8536e09f52c0ba files/pptpd-1.3.4-more-reodering-fixes.patch 2340
 SHA256 4540048186b1c1805b02d7d4740b89c498ea5e71a313b6592e469087bb4f0e9f files/pptpd-1.3.4-more-reodering-fixes.patch 2340
+AUX pptpd-1.3.4-pptpd-compiletime.patch 388 RMD160 5ddfc3a86ae2c2972904f508231761c4406b8c6a SHA1 7577e995e9cd192126b3f77ef2a6f828f5b88745 SHA256 55eb0cbbeabe8deb441e21a94dbc1253d827950c5b5cbcddaec2905950a5aa66
+MD5 b58ff7545afb26eabe901253f3e1912a files/pptpd-1.3.4-pptpd-compiletime.patch 388
+RMD160 5ddfc3a86ae2c2972904f508231761c4406b8c6a files/pptpd-1.3.4-pptpd-compiletime.patch 388
+SHA256 55eb0cbbeabe8deb441e21a94dbc1253d827950c5b5cbcddaec2905950a5aa66 files/pptpd-1.3.4-pptpd-compiletime.patch 388
 AUX pptpd-1.3.4-pptpdefs-head-packed.patch 390 RMD160 ec0bca72feee4e3caed1fe2abf914cac03a1f8ee SHA1 db37c67b662bc1a9488a256cf3a2c7780f4d7d0e SHA256 ae58f2614c167af9f9f2cbd7cb81194a4d605f870e5c1f2b8b4d089bd6d7cbb4
 MD5 5c68958fd0247bbb1a0d69fef6560777 files/pptpd-1.3.4-pptpdefs-head-packed.patch 390
 RMD160 ec0bca72feee4e3caed1fe2abf914cac03a1f8ee files/pptpd-1.3.4-pptpdefs-head-packed.patch 390
@@ -23,10 +27,10 @@ MD5 96fed26a1a72e947d12edda983f74d16 files/pptpd-init 386
 RMD160 e496308edea338dfbd89016ae02aeb11db4fb0e0 files/pptpd-init 386
 SHA256 17e78d810690dbbe0738d9f146b6b58e7b45f19ec545be630f1bf338869a86f4 files/pptpd-init 386
 DIST pptpd-1.3.4.tar.gz 240942 RMD160 1c6c748bf9e81d223087998ee0cca821814d19f9 SHA1 3d1faf99055e420bafa96c96e8871a888c50b4e8 SHA256 c23a9bdd219a0a36ae7ca20e7c9749f2efdcdbf108aabeeeb5066ba442ec88b6
-EBUILD pptpd-1.3.4.ebuild 1704 RMD160 c0aed1adcda2bf152c5915d80edc4546b2856921 SHA1 5f6d9bc27171912c19e2ea42313bef9ff0aa1495 SHA256 9e6bda70678d42f73eda09fdf4753c9146aee44335a89849ab415d15e6d59bf1
-MD5 3f159651d005ca2d246dfce0a65b628e pptpd-1.3.4.ebuild 1704
-RMD160 c0aed1adcda2bf152c5915d80edc4546b2856921 pptpd-1.3.4.ebuild 1704
-SHA256 9e6bda70678d42f73eda09fdf4753c9146aee44335a89849ab415d15e6d59bf1 pptpd-1.3.4.ebuild 1704
+EBUILD pptpd-1.3.4.ebuild 1755 RMD160 2c89fefa3300e1ea9cf13525751b77753a424608 SHA1 e40d23c4354c25ee638ddda7462a76df98b894c0 SHA256 ec83ac2727e66dd954c3a10a047fc8e6678b6e38c50505a493c8504f869919cd
+MD5 e33e40dd78968878ae82dd677c408121 pptpd-1.3.4.ebuild 1755
+RMD160 2c89fefa3300e1ea9cf13525751b77753a424608 pptpd-1.3.4.ebuild 1755
+SHA256 ec83ac2727e66dd954c3a10a047fc8e6678b6e38c50505a493c8504f869919cd pptpd-1.3.4.ebuild 1755
 MISC ChangeLog 4714 RMD160 cef9912617605b71a7fc2be871546d081ca42f66 SHA1 addd93c037ce00a881bcc35e8ddaa3e9c80c5130 SHA256 bfafb92c8ee8207b2f5aad956b7f6482ec117f7ec9488c49178742592fae4efc
 MD5 3616aa4c81056e3be88f65dadc585936 ChangeLog 4714
 RMD160 cef9912617605b71a7fc2be871546d081ca42f66 ChangeLog 4714

@@ -23,6 +23,7 @@ src_unpack() {
 	epatch "${FILESDIR}/${P}-more-reodering-fixes.patch"
 	epatch "${FILESDIR}/${P}-pptpdefs-head-packed.patch"
 	epatch "${FILESDIR}/${P}-pptpgre-error-msg.patch"
+	epatch "${FILESDIR}/${P}-pptpd-compiletime.patch"
 
 	#Match pptpd-logwtmp.so's version with pppd's version (#89895)
 	local PPPD_VER=`best_version net-dialup/ppp`
