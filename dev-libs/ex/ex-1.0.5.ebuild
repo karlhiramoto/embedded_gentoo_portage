@@ -2,7 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # ebuild by Karl Hiramoto
 
-DESCRIPTION="libubiqx database libary"
+inherit libtool flag-o-matic eutils
+
+DESCRIPTION="exception libary"
 HOMEPAGE="http://www.ossp.org/pkg/lib/ex/"
 SRC_URI="ftp://ftp.ossp.org/pkg/lib/ex/ex-1.0.5.tar.gz"
 
@@ -12,9 +14,18 @@ KEYWORDS="x86"
 
 IUSE=""
 DEPEND="virtual/libc"
+S="${WORKDIR}"/ex-${PV}
 
+# src_configure() {
+# 	echo "${WORKDIR}"/ex-${PV}
+# 	cd "${WORKDIR}"/ex-${PV}
+# 	
+# }
 
 src_compile() {
+	echo "${S}"
+	echo "${WORKDIR}"/ex-${PV}
+	cd "${WORKDIR}"/ex-${PV}
 	econf || die "Configure failed"
 	emake || die "Copilation failed"
 
