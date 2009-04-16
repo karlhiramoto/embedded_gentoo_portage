@@ -1,0 +1,139 @@
+diff -Naru neon-0.27.0/src/ne_private.h neon-0.27.0-modified/src/ne_private.h
+--- neon-0.27.0/src/ne_private.h	2006-12-29 00:12:18.000000000 +0100
++++ neon-0.27.0-modified/src/ne_private.h	2008-01-23 12:32:46.000000000 +0100
+@@ -104,10 +104,14 @@
+     ne_ssl_provide_fn ssl_provide_fn;
+     void *ssl_provide_ud;
+ 
++    /* User defined resolv callback */
++    ns_resolv_cb* resolv_fn;
++
+     ne_session_status_info status;
+ 
+     /* Error string */
+     char error[512];
++
+ };
+ 
+ /* Pushes block of 'count' bytes at 'buf'. Returns non-zero on
+diff -Naru neon-0.27.0/src/ne_request.c neon-0.27.0-modified/src/ne_request.c
+--- neon-0.27.0/src/ne_request.c	2007-08-22 13:47:19.000000000 +0200
++++ neon-0.27.0-modified/src/ne_request.c	2008-01-23 12:32:46.000000000 +0100
+@@ -29,6 +29,8 @@
+ 
+ #include <errno.h>
+ #include <fcntl.h>
++#include <netinet/in.h>
++
+ #ifdef HAVE_STRING_H
+ #include <string.h>
+ #endif
+@@ -1116,7 +1118,13 @@
+     NE_DEBUG(NE_DBG_HTTP, "Doing DNS lookup on %s...\n", info->hostname);
+     sess->status.lu.hostname = info->hostname;
+     notify_status(sess, ne_status_lookup);
+-    info->address = ne_addr_resolve(info->hostname, 0);
++    if (sess->resolv_fn) {
++      in_addr_t h_addr;
++      h_addr = sess->resolv_fn(info->hostname,0);
++      info->address = ne_sock_addr_make(&h_addr);
++    } else {
++      info->address = ne_addr_resolve(info->hostname, 0);
++    }
+     if (ne_addr_result(info->address)) {
+ 	char buf[256];
+ 	ne_set_error(sess, _("Could not resolve hostname `%s': %s"), 
+diff -Naru neon-0.27.0/src/ne_session.c neon-0.27.0-modified/src/ne_session.c
+--- neon-0.27.0/src/ne_session.c	2007-08-21 20:56:40.000000000 +0200
++++ neon-0.27.0-modified/src/ne_session.c	2008-01-23 12:32:46.000000000 +0100
+@@ -491,3 +491,11 @@
+ {
+     REMOVE_HOOK(sess->destroy_sess_hooks, fn, userdata);
+ }
++
++void ne_set_ns_lookup_fn(ne_session *sess,ns_resolv_cb * fn)
++{
++  if (fn)
++    sess->resolv_fn = fn;
++  else
++    sess->resolv_fn = NULL;
++}
+diff -Naru neon-0.27.0/src/ne_session.h neon-0.27.0-modified/src/ne_session.h
+--- neon-0.27.0/src/ne_session.h	2007-08-22 14:00:06.000000000 +0200
++++ neon-0.27.0-modified/src/ne_session.h	2008-01-23 12:32:46.000000000 +0100
+@@ -28,6 +28,9 @@
+ #include "ne_uri.h" /* for ne_uri */
+ #include "ne_defs.h"
+ #include "ne_socket.h"
++#include <netinet/in.h>
++
++typedef in_addr_t (ns_resolv_cb) (char *,int);
+ 
+ NE_BEGIN_DECLS
+ 
+@@ -271,6 +274,10 @@
+ /* Retrieve the error string for the session */
+ const char *ne_get_error(ne_session *sess);
+ 
++void ne_set_ns_lookup_fn(ne_session *sess,ns_resolv_cb * fn);
++
++void ne_set_ns_lookup_fn(ne_session *sess,ns_resolv_cb * fn);
++
+ NE_END_DECLS
+ 
+ #endif /* NE_SESSION_H */
+diff -Naru neon-0.27.0/src/ne_socket.c neon-0.27.0-modified/src/ne_socket.c
+--- neon-0.27.0/src/ne_socket.c	2007-08-10 15:05:10.000000000 +0200
++++ neon-0.27.0-modified/src/ne_socket.c	2008-01-23 12:37:43.000000000 +0100
+@@ -809,6 +809,30 @@
+ extern int h_errno;
+ #endif
+ 
++/*
++	in_addr_t argument must be a pointer, due to extrange type cloacking.
++*/
++ne_sock_addr *ne_sock_addr_make(in_addr_t *h_addr)
++{
++
++    ne_sock_addr *sock_addr = ne_calloc(sizeof *sock_addr);
++    ne_inet_addr *addr = ne_iaddr_make(ne_iaddr_ipv4,(const char*)&h_addr);
++#ifdef USE_GETADDRINFO
++    if (h_addr == INADDR_NONE)
++      sock_addr->errnum = ENOENT;
++    else 
++      sock_addr->result = addr;
++#else
++    if (h_addr == INADDR_NONE)
++      sock_addr->errnum = ENOENT;
++    else {
++      sock_addr->addrs = addr;
++      sock_addr->count = 1;
++    }
++#endif
++    return sock_addr;
++}
++
+ /* This implemementation does not attempt to support IPv6 using
+  * gethostbyname2 et al.  */
+ ne_sock_addr *ne_addr_resolve(const char *hostname, int flags)
+diff -Naru neon-0.27.0/src/ne_socket.h neon-0.27.0-modified/src/ne_socket.h
+--- neon-0.27.0/src/ne_socket.h	2007-08-10 15:05:10.000000000 +0200
++++ neon-0.27.0-modified/src/ne_socket.h	2008-01-23 12:32:46.000000000 +0100
+@@ -26,6 +26,7 @@
+ 
+ #include "ne_defs.h"
+ #include "ne_ssl.h" /* for ne_ssl_context */
++#include <netinet/in.h>
+ 
+ NE_BEGIN_DECLS
+ 
+@@ -58,6 +59,9 @@
+  * times to ne_sock_init() for the process. */
+ void ne_sock_exit(void);
+ 
++/* Create a socket network address object from in_addr_t */
++ne_sock_addr *ne_sock_addr_make(in_addr_t *h_addr);
++
+ /* Resolve the given hostname.  'flags' must be zero.  Hex
+  * string IPv6 addresses (e.g. `::1') may be enclosed in brackets
+  * (e.g. `[::1]'). */
