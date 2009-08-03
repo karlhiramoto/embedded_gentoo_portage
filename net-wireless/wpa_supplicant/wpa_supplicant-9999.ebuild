@@ -10,9 +10,10 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="http://w1.fi/hostap.git"
 	inherit git
 	SRC_URI=""
+	S="${WORKDIR}/${P}/${PN}/${PN}"
 else
 	SRC_URI="http://hostap.epitest.fi/releases/${P}.tar.gz"
-	S=${WORKDIR}/${MY_P}
+	S="${WORKDIR}/${P}/${PN}"
 fi
 
 DESCRIPTION="IEEE 802.1X/WPA supplicant for secure wireless transfers"
@@ -42,18 +43,19 @@ DEPEND="dev-libs/libnl
 	!ssl? ( !gnutls? ( dev-libs/libtommath ) )"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${P}/${PN}"
+S="${WORKDIR}/${P}/${PN}/${PN}"
 
 
 src_unpack() {
-	  einfo "src dir ${S}/"
-	  if [[ ${PV} == "9999" ]] ; then
-			  git_src_unpack
-			  cd "${S}"
+	einfo "src dir ${S}/"
+	if [[ ${PV} == "9999" ]] ; then
+		S="${WORKDIR}/${P}/${PN}"
+		git_src_unpack
+		S="${WORKDIR}/${P}/${PN}/${PN}"
 	  else
-			  unpack ${A}
-			  cd "${S}"
-	  fi
+		unpack ${A}
+	fi
+	cd "${S}"
 }
 
 pkg_setup() {
@@ -67,6 +69,8 @@ pkg_setup() {
 }
 
 src_prepare() {
+	einfo "src dir ${S}/"
+
 	# net/bpf.h needed for net-libs/libpcap on Gentoo/FreeBSD
 	sed -i \
 		-e "s:\(#include <pcap\.h>\):#include <net/bpf.h>\n\1:" \
@@ -85,10 +89,11 @@ src_prepare() {
 		-e "s:/usr/lib/pkcs11:/usr/$(get_libdir):" \
 		wpa_supplicant.conf || die
 
-	epatch "${FILESDIR}"/dbus_path_fix.patch
+ 	epatch "${FILESDIR}"/dbus_path_fix.patch
 }
 
 src_configure() {
+# 	cd ${S}/${PN}
 	# Toolchain setup
 	echo "CC = $(tc-getCC)" > .config
 
@@ -185,6 +190,7 @@ src_configure() {
 }
 
 src_compile() {
+# 	cd ${S}/${PN}
 	emake || die "emake failed"
 
 	if use qt4 ; then
@@ -199,6 +205,9 @@ src_compile() {
 }
 
 src_install() {
+
+# 	cd ${S}/${PN}
+
 	dosbin wpa_supplicant || die
 	dobin wpa_cli wpa_passphrase || die
 
@@ -215,8 +224,6 @@ src_install() {
 
 	dodoc ChangeLog {eap_testing,todo}.txt README{,-WPS} \
 		wpa_supplicant.conf || die "dodoc failed"
-
-	doman doc/docbook/*.{5,8} || die "doman failed"
 
 	if use qt4 ; then
 		into /usr
