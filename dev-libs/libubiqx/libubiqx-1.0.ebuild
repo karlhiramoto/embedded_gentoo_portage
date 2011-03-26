@@ -8,7 +8,7 @@ SRC_URI="http://ubiqx.org/pub/libubiqx.tgz"
 
 LICENSE="as-is"
 SLOT="0"
-KEYWORDS="x86"
+KEYWORDS="x86 amd64"
 
 IUSE=""
 DEPEND="virtual/libc"
